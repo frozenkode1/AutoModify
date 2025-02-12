@@ -108,4 +108,4 @@ local function AutoModify()
 		end
 	end)
 end
-coroutine.wrap(AutoModify)
+coroutine.wrap(AutoModify)()
