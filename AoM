@@ -103,7 +103,7 @@ local function AutoModify()
 				Frame.Visible = false
 			else
 				TextButton2.Visible = true
-				Frame.Visible = false
+				Frame.Visible = true
 			end
 		end
 	end)
