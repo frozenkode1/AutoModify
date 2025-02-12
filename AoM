@@ -1,3 +1,8 @@
+if game.CoreGui:FindFirstChild("AutoModify") then
+	return
+	print("already loaded")
+end
+
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
@@ -6,7 +11,7 @@ local TextButton2 = Instance.new("TextButton")
 
 --Properties:
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = game:WaitForChild("CoreGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Name = "AutoModify"
 ScreenGui.ResetOnSpawn = false
