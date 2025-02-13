@@ -112,7 +112,11 @@ local function AutoModify()
 	end)
 
 	local inputService = game:GetService("UserInputService")
-	inputService.InputBegan:Connect(function(input)
+	inputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then
+			return
+		end
+
 		if input.KeyCode == Enum.KeyCode.P then
 			if TextButton2.Visible then
 				TextButton2.Visible = false
