@@ -7,10 +7,11 @@ local Frame = Instance.new("Frame")
 local TextBox = Instance.new("TextBox")
 local TextButton = Instance.new("TextButton")
 local TextButton2 = Instance.new("TextButton")
+local UIDrag = Instance.new("UIDragDetector")
 
 --Properties:
 
-ScreenGui.Parent = game:WaitForChild("CoreGui")
+--ScreenGui.Parent = game:WaitForChild("CoreGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Name = "AutoModify"
 ScreenGui.ResetOnSpawn = false
@@ -45,6 +46,10 @@ TextButton.Text = "Change (will stay on reset)"
 TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextButton.TextSize = 14.000
 
+UIDrag.Parent = Frame
+UIDrag.ActivatedCursorIcon = "rbxassetid://0"
+UIDrag.CursorIcon = "rbxassetid://0"
+
 -- Scripts:
 local function AutoModify()
 	local menu = game:GetService("Players").LocalPlayer.PlayerGui.Menu.Background.ModifyUser.EnterUsername
@@ -60,19 +65,31 @@ local function AutoModify()
 			ModifyUsername_upvr:FireServer(Text)
 		end)
 	end
+	
+	local function change(charUpdate)
 
-	TextButton.MouseButton1Click:Connect(function()
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
 			ModifyUsername_upvr:FireServer(Text)
-
-			if connection then
-				connection:Disconnect()
+			
+			if not charUpdate then
+				
+				if connection then
+					connection:Disconnect()
+				end
+				
+				connection = plr.CharacterAdded:Connect(function()
+					ModifyUsername_upvr:FireServer(Text)
+				end)
 			end
-			connection = changeOnReset(Text)
 		else
 			print("Please enter a username.")
 		end
+	end
+		
+
+	TextButton.MouseButton1Click:Connect(function()
+		change(false)
 	end)
 
 	TextButton2.Parent = ScreenGui
@@ -95,11 +112,7 @@ local function AutoModify()
 	end)
 
 	local inputService = game:GetService("UserInputService")
-	inputService.InputBegan:Connect(function(input, GameProcessed)
-		if GameProcessed then
-			return
-		end
-
+	inputService.InputBegan:Connect(function(input)
 		if input.KeyCode == Enum.KeyCode.P then
 			if TextButton2.Visible then
 				TextButton2.Visible = false
@@ -108,6 +121,8 @@ local function AutoModify()
 				TextButton2.Visible = true
 				Frame.Visible = true
 			end
+		elseif input.KeyCode == Enum.KeyCode.LeftBracket then
+			change(true)
 		end
 	end)
 end
