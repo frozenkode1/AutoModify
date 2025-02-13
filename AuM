@@ -11,7 +11,7 @@ local UIDrag = Instance.new("UIDragDetector")
 
 --Properties:
 
---ScreenGui.Parent = game:WaitForChild("CoreGui")
+ScreenGui.Parent = game:WaitForChild("CoreGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 ScreenGui.Name = "AutoModify"
 ScreenGui.ResetOnSpawn = false
