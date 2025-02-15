@@ -71,7 +71,8 @@ local function AutoModify()
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
 			ModifyUsername_upvr:FireServer(Text)
-			
+			writefile("AuM.txt", Text)
+
 			if not charUpdate then
 				
 				if connection then
