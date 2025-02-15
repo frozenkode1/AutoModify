@@ -87,6 +87,13 @@ local function AutoModify()
 		end
 	end
 		
+	if isfile("AuM.txt") then
+		TextButton2.Visible = false
+		Frame.Visible = false
+		
+		Frame.TextBox.Text = readfile("AuM.txt")
+		change(false)
+	end
 
 	TextButton.MouseButton1Click:Connect(function()
 		change(false)
