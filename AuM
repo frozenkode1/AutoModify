@@ -1,18 +1,141 @@
-local function _0x1a2b3c4d(str) 
-  local ret = ""; for i=1,#str do ret=ret..string.char(string.byte(str,i)~0x42)end;return ret
-end local function _0x4e5f6g7h(num) local salt = math.random(1000,9999); return num + salt, salt end local function _0x8i9j0k1l(obf, salt) return obf - salt end
-local _0x2m3n4o5p = function(...)
-  local arg = {...}; local _0x6q7r8s9t = table.concat; local _0x0u1v2w3x = table.insert
-  local _0x7y8z9a0b = game:GetService(_0x1a2b3c4d("\122\105\104\116\103\117\105"))
-  local _0x3c4d5e6f = _0x7y8z9a0b:FindFirstChild(_0x1a2b3c4d("\65\117\116\111\77\111\100\105\102\121"))
-  if _0x3c4d5e6f then return end
-  local _0x7g8h9i0j = Instance.new(_0x1a2b3c4d("\123\99\114\101\101\110\71\117\105"))
-  local _0x1k2l3m4n = Instance.new(_0x1a2b3c4d("\70\114\97\109\101"))
-  local _0x5o6p7q8r = Instance.new(_0x1a2b3c4d("\84\101\120\116\66\111\120"))
-  local _0x9s0t1u2v = Instance.new(_0x1a2b3c4d("\84\101\120\116\66\117\116\116\111\110"))
-  local _0x3w4x5y6z = Instance.new(_0x1a2b3c4d("\84\101\120\116\66\117\116\116\111\110"))
-  local _0x7a8b9c0d = Instance.new(_0x1a2b3c4d("\85\73\68\114\97\103\68\101\116\101\99\116\111\114"))
-  _0x7g8h9i0j.Parent = _0x7y8z9a0b:WaitForChild(_0x1a2b3c4d("\103\111\114\101\71\117\105"))
-  _0x7g8h9i0j.ZIndexBehavior = Enum.ZIndexBehavior.Sibling; _0x7g8h9i0j.Name = _0x1a2b3c4d("\65\117\116\111\77\111\100\105\102\121"); _0x7g8h9i0j.ResetOnSpawn = false
-  _0x1k2l3m4n.Parent = _0x7g8h9i0j; local _0x0e1f2g3h,_0x4i5j6k7l = _0x4e5f6g7h(255); _0x1k2l3m4n.BackgroundColor3 = Color3.fromRGB(_0x8i9j0k1l(_0x0e1f2g3h,_0x4i5j6k7l),_0x8i9j0k1l(_0x0e1f2g3h,_0x4i5j6k7l),_0x8i9j0k1l(_0x0e1f2g3h,_0x4i5j6k7l))
- local _0x8m9n0o1p = function() end coroutine.wrap(_0x8m9n0o1p)() end _0x2m3n4o5p()
+if game.CoreGui:FindFirstChild("AutoModify") then
+	return
+end
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local TextButton = Instance.new("TextButton")
+local TextButton2 = Instance.new("TextButton")
+local UIDrag = Instance.new("UIDragDetector")
+
+--Properties:
+
+ScreenGui.Parent = game:WaitForChild("CoreGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Name = "AutoModify"
+ScreenGui.ResetOnSpawn = false
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.389947563, 0, 0.344660193, 0)
+Frame.Size = UDim2.new(0, 351, 0, 100)
+
+TextBox.Parent = Frame
+TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0, 0, 0.25, 0)
+TextBox.Size = UDim2.new(0, 200, 0, 50)
+TextBox.Font = Enum.Font.SourceSans
+TextBox.PlaceholderText = "Enter username"
+TextBox.Text = ""
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.TextSize = 14.000
+
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.BorderSizePixel = 0
+TextButton.Position = UDim2.new(0.629629612, 0, 0.25, 0)
+TextButton.Size = UDim2.new(0, 117, 0, 50)
+TextButton.Font = Enum.Font.SourceSans
+TextButton.Text = "Change (will stay on reset)"
+TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextButton.TextSize = 14.000
+
+UIDrag.Parent = Frame
+UIDrag.ActivatedCursorIcon = "rbxassetid://0"
+UIDrag.CursorIcon = "rbxassetid://0"
+
+-- Scripts:
+local function AutoModify()
+	local menu = game:GetService("Players").LocalPlayer.PlayerGui.Menu.Background.ModifyUser.EnterUsername
+	local Enter_upvr = menu.Enter
+	local ModifyUsername_upvr = game.ReplicatedStorage:WaitForChild("ModifyUsername")
+	local Players = game:GetService("Players")
+	local plr = Players.LocalPlayer
+
+	local connection = nil
+
+	local function changeOnReset(Text)
+		return plr.CharacterAdded:Connect(function()
+			ModifyUsername_upvr:FireServer(Text)
+		end)
+	end
+	
+	local function change(charUpdate)
+
+		local Text = Frame.TextBox.Text
+		if Text and Text ~= "" then
+			ModifyUsername_upvr:FireServer(Text)
+			writefile("AuM.txt", Text)
+
+			if not charUpdate then
+				
+				if connection then
+					connection:Disconnect()
+				end
+				
+				connection = plr.CharacterAdded:Connect(function()
+					ModifyUsername_upvr:FireServer(Text)
+				end)
+			end
+		else
+			print("Please enter a username.")
+		end
+	end
+		
+	if isfile("AuM.txt") then
+		TextButton2.Visible = false
+		Frame.Visible = false
+		
+		Frame.TextBox.Text = readfile("AuM.txt")
+		change(false)
+	end
+
+	TextButton.MouseButton1Click:Connect(function()
+		change(false)
+	end)
+
+	TextButton2.Parent = ScreenGui
+	TextButton2.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+	TextButton2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton2.BorderSizePixel = 0
+	TextButton2.Position = UDim2.new(0.978313267, 0, 0.572815478, 0)
+	TextButton2.Size = UDim2.new(0, 27, 0, 29)
+	TextButton2.Font = Enum.Font.SourceSans
+	TextButton2.Text = "Open"
+	TextButton2.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton2.TextSize = 14.000
+
+	TextButton2.MouseButton1Click:Connect(function()
+		if Frame.Visible then 
+			Frame.Visible = false
+		else
+			Frame.Visible = true
+		end
+	end)
+
+	local inputService = game:GetService("UserInputService")
+	inputService.InputBegan:Connect(function(input, gameProcessed)
+		if gameProcessed then
+			return
+		end
+
+		if input.KeyCode == Enum.KeyCode.P then
+			if TextButton2.Visible then
+				TextButton2.Visible = false
+				Frame.Visible = false
+			else
+				TextButton2.Visible = true
+				Frame.Visible = true
+			end
+		elseif input.KeyCode == Enum.KeyCode.LeftBracket then
+			change(true)
+		end
+	end)
+end
+coroutine.wrap(AutoModify)()
