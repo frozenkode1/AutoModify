@@ -67,20 +67,25 @@ local function AutoModify()
 		end)
 	end
 	
-	local function checkUsername(Text)
-		if Text == plr.Name then
-		     wait(0.2)
-		     ToggleDisallowEvent_upvr:FireServer()
-		     wait(0.1)
+	local function checkUsername(text)
+
+		if Text then
+		    if Text == plr.Name then
+		       ToggleDisallowEvent_upvr:FireServer()
+		       return true
+		   end
 		end
+
+		wait(0.2)
+		ToggleDisallowEvent_upvr:FireServer()
 	end
 	local function change(charUpdate)
 
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
-			checkUsername(Text)
+			local isCurrentPlayer = checkUsername(Text)
 			ModifyUsername_upvr:FireServer(Text)
-			checkUsername(Text)
+			checkUsername()
 			writefile("AuM.txt", Text)
 			
 
@@ -89,11 +94,10 @@ local function AutoModify()
 				if connection then
 					connection:Disconnect()
 				end
-				
+
+				if isCurrentPlayer then return end
 				connection = plr.CharacterAdded:Connect(function()
-					checkUsername(Text)
 					ModifyUsername_upvr:FireServer(Text)
-					checkUsername(Text)
 				end)
 			end
 		else
