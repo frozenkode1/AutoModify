@@ -67,7 +67,9 @@ local function AutoModify()
 		end)
 	end
 
-	local function checkUsername(isCurrentPlayer, text)
+	local function checkUsername(text)
+		local isCurrentPlayer
+
 		if Text then
 		    if Text == plr.Name then isCurrentPlayer = true end
 		end
@@ -81,9 +83,9 @@ local function AutoModify()
 
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
-			local isCurrentPlayer = checkUsername(false, Text)
+			local isCurrentPlayer = checkUsername(Text)
 			ModifyUsername_upvr:FireServer(Text)
-			checkUsername(isCurr)
+			checkUsername()
 			writefile("AuM.txt", Text)
 			
 
