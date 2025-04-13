@@ -65,13 +65,20 @@ local function AutoModify()
 			ModifyUsername_upvr:FireServer(Text)
 		end)
 	end
-	
+
+	local function checkUsername(Text)
+		if Text == plr.Name then
+		     ToggleDisallowEvent_upvr:FireServer()
+	end
 	local function change(charUpdate)
 
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
+			checkUsername(Text)
 			ModifyUsername_upvr:FireServer(Text)
+			checkUsername(Text)
 			writefile("AuM.txt", Text)
+			
 
 			if not charUpdate then
 				
@@ -80,7 +87,9 @@ local function AutoModify()
 				end
 				
 				connection = plr.CharacterAdded:Connect(function()
+					checkUsername(Text)
 					ModifyUsername_upvr:FireServer(Text)
+					checkUsername(Text)
 				end)
 			end
 		else
