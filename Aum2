@@ -125,7 +125,7 @@ local function AutoModify()
 			return
 		end
 
-		if input.KeyCode == Enum.KeyCode.0 then
+		if input.KeyCode == Enum.KeyCode.Zero then
 			if TextButton2.Visible then
 				TextButton2.Visible = false
 				Frame.Visible = false
