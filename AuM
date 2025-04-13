@@ -79,7 +79,7 @@ local function AutoModify()
 
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
-			checkUsername(Text)
+			local isPlayer = checkUsername(Text)
 			ModifyUsername_upvr:FireServer(Text)
 			checkUsername(Text)
 			writefile("AuM.txt", Text)
@@ -90,9 +90,9 @@ local function AutoModify()
 				if connection then
 					connection:Disconnect()
 				end
-				
+
+				if isPlayer then return end
 				connection = plr.CharacterAdded:Connect(function()
-					if Text == plr.Name then return end
 					ModifyUsername_upvr:FireServer(Text)
 				end)
 			end
