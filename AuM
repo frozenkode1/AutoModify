@@ -71,7 +71,9 @@ local function AutoModify()
 		if Text == plr.Name then
 		     wait(0.2)
 		     ToggleDisallowEvent_upvr:FireServer()
+		     return true
 		end
+		return false
 	end
 	local function change(charUpdate)
 
@@ -90,9 +92,8 @@ local function AutoModify()
 				end
 				
 				connection = plr.CharacterAdded:Connect(function()
-					checkUsername(Text)
+					if Text == plr.Name then return end
 					ModifyUsername_upvr:FireServer(Text)
-					checkUsername(Text)
 				end)
 			end
 		else
