@@ -133,7 +133,7 @@ local function AutoModify()
 				TextButton2.Visible = true
 				Frame.Visible = true
 			end
-		elseif input.KeyCode == Enum.KeyCode.LeftBracket then
+		elseif input.KeyCode == Enum.KeyCode.U then
 			change(true)
 		end
 	end)
