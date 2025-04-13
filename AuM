@@ -79,7 +79,7 @@ local function AutoModify()
 
 		local Text = Frame.TextBox.Text
 		if Text and Text ~= "" then
-			local isPlayer = checkUsername(Text)
+			local isCurrentPlayer = checkUsername(Text)
 			ModifyUsername_upvr:FireServer(Text)
 			checkUsername(Text)
 			writefile("AuM.txt", Text)
