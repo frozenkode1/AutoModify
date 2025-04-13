@@ -69,7 +69,7 @@ local function AutoModify()
 
 	local function checkUsername(Text)
 		if Text == plr.Name then
-		     wait(0.1)
+		     wait(0.2)
 		     ToggleDisallowEvent_upvr:FireServer()
 		     wait(0.1)
 		end
