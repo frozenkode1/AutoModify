@@ -57,6 +57,7 @@ local function AutoModify()
 	local ModifyUsername_upvr = game.ReplicatedStorage:WaitForChild("ModifyUsername")
 	local Players = game:GetService("Players")
 	local plr = Players.LocalPlayer
+	local ToggleDisallowEvent_upvr = game.ReplicatedStorage:WaitForChild("ToggleDisallowEvent")
 
 	local connection = nil
 
