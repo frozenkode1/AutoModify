@@ -69,15 +69,13 @@ local function AutoModify()
 
 	local function checkUsername(isCurrentPlayer, text)
 		if Text then
-		    if Text == plr.Name and not isCurrentPlayer then isCurrentPlayer = true end
+		    if Text == plr.Name then isCurrentPlayer = true end
 		end
 
-		if isCurrentPlayer then
-		     wait(0.2)
-		     ToggleDisallowEvent_upvr:FireServer()
-		end
+		wait(0.2)
+		ToggleDisallowEvent_upvr:FireServer()
 
-		return isCurrentPlayer
+		if isCurrentPlayer then	return isCurrentPlayer end
 	end
 	local function change(charUpdate)
 
@@ -85,7 +83,7 @@ local function AutoModify()
 		if Text and Text ~= "" then
 			local isCurrentPlayer = checkUsername(false, Text)
 			ModifyUsername_upvr:FireServer(Text)
-			checkUsername(isCurrentPlayer)
+			checkUsername(isCurr)
 			writefile("AuM.txt", Text)
 			
 
