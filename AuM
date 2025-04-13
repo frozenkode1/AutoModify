@@ -91,7 +91,7 @@ local function AutoModify()
 					connection:Disconnect()
 				end
 
-				if isPlayer then return end
+				if isCurrentPlayer then return end
 				connection = plr.CharacterAdded:Connect(function()
 					ModifyUsername_upvr:FireServer(Text)
 				end)
