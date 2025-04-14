@@ -69,7 +69,7 @@ local function AutoModify()
 
 	local function checkUsername(text)
 		local isCurrentPlayer
-		if Text and Text == plr.Name then
+		if text and text == plr.Name then
 		       isCurrentPlayer = true
 		else
 		   task.wait(0.2)
