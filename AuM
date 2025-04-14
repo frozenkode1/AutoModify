@@ -76,7 +76,7 @@ local function AutoModify()
 		end
 	
 		ToggleDisallowEvent_upvr:FireServer()
-		if isCurrentPlayer then return isCurrentPlayer
+		if isCurrentPlayer then return isCurrentPlayer end
 	end
 	local function change(charUpdate)
 
