@@ -72,7 +72,7 @@ local function AutoModify()
 		if text and text == plr.Name then
 		       isCurrentPlayer = true
 		else
-		   wait(0.5)
+		   wait(1)
 		end
 	
 		ToggleDisallowEvent_upvr:FireServer()
