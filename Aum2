@@ -71,9 +71,7 @@ local function AutoModify()
 		local isCurrentPlayer
 		if text and text == plr.Name then
 		       isCurrentPlayer = true
-		else
-		   wait(1)
-		end
+		else if not isCurrentPlayer then wait(1) end
 	
 		ToggleDisallowEvent_upvr:FireServer()
 		if isCurrentPlayer then return isCurrentPlayer end
