@@ -68,7 +68,7 @@ local function AutoModify()
 	end
 
 	local function checkUsername(text)
-		local isCurrentPlayer
+		local isCurrentPlayer = false
 		if text and text == plr.Name then
 		       isCurrentPlayer = true
 		elseif not isCurrentPlayer then wait(1) end
