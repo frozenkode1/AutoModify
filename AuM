@@ -71,6 +71,7 @@ local function AutoModify()
 		local isCurrentPlayer = false
 		if text and text == plr.Name then
 		       isCurrentPlayer = true
+		end
 
 		if not isCurrentPlayer then wait(1) end
 	
