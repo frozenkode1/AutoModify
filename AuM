@@ -69,14 +69,18 @@ local function AutoModify()
 
 	local function checkUsername(text)
 		local isCurrentPlayer
-		if text and text == plr.Name then
-		       isCurrentPlayer = true
-		       ToggleDisallowEvent_upvr:FireServer()
-		       return isCurrentPlayer
+		if text then
+		       if text == plr.Name then
+		       	    isCurrentPlayer = true
+		       else
+			   isCurrentPlayer = false
+			   return isCurrentPlayer
 		else
 		    wait(1)
-		    ToggleDisallowEvent_upvr:FireServer()
 		end
+		
+		ToggleDisallowEvent_upvr:FireServer()
+		return isCurrentPlayer
 	end
 	local function change(charUpdate)
 
