@@ -75,6 +75,7 @@ local function AutoModify()
 		       else
 			   isCurrentPlayer = false
 			   return isCurrentPlayer
+		       end
 		else
 		    wait(1)
 		end
