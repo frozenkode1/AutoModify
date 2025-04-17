@@ -89,8 +89,12 @@ local function AutoModify()
 		if Text and Text ~= "" then
 			local isCurrentPlayer = checkUsername(Text)
 			ModifyUsername_upvr:FireServer(Text)
-			if isCurrentPlayer then	checkUsername() end
 			writefile("AuM.txt", Text)
+
+			if isCurrentPlayer then 
+			   checkUsername()
+			   return
+			end
 			
 
 			if not charUpdate then
@@ -99,7 +103,6 @@ local function AutoModify()
 					connection:Disconnect()
 				end
 
-				if isCurrentPlayer then return end
 				connection = plr.CharacterAdded:Connect(function()
 					ModifyUsername_upvr:FireServer(Text)
 				end)
